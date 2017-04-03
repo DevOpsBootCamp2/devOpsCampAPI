@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.cap.datastore.NoSQL;
 import com.cap.domain.User;
 
+import comp.cap.db.UserDAOImp;
+
 @SpringBootApplication
 public class DevOpsCampAPIApplication {
 
@@ -28,6 +30,19 @@ public class DevOpsCampAPIApplication {
 		
 		data.putUser(user0);
 		data.putUser(user1);
+		
+		
+		System.out.println();
+		User user = new User("biniam", "gebreyesus", "yolo", "biniam@biniam.com");
+		UserDAOImp userDAOImp = new UserDAOImp();
+		userDAOImp.getUser(user.getEmail());
+		userDAOImp.getUsers();
+		
+		userDAOImp.addUser(user);
+		
+		userDAOImp.getUser(user.getEmail());
+		userDAOImp.getUsers();
+		
 		
 		SpringApplication.run(DevOpsCampAPIApplication.class, args);
 	}

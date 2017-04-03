@@ -1,12 +1,34 @@
 package com.cap.domain;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
 public class User {
 
+	//TODO: Need id? @NotNull
 	private int id;
+	@NotNull
 	private String firstName;
+	@NotNull
 	private String lastName;
+	@NotNull
 	private String password;
+	@NotNull
+	@Email
 	private String email;
+	
+	public User(){
+		
+	}
+	
+	public User(String firstName, String lastName, String password, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+	}
 
 	public int getId() {
 		return id;
