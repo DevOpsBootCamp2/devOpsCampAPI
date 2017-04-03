@@ -5,10 +5,10 @@ import com.cap.domain.User;
 
 public interface UserDAO {
 	
-	List<User> getUsers();
-	User getUser(String email);
-	void updateUser(User user);
-	void deleteUSer(User user);
-	void addUser(User user);
+	public List<User> getUsers();
+	public User getUser(String email);
+	public void updateUser(User user);
+	public void deleteUSer(User user);
+	public void addUser(User user);
 	
 }

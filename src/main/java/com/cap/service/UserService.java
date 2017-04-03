@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cap.datastore.NoSQL;
 import com.cap.domain.Login;
 import com.cap.domain.User;
-import comp.cap.db.UserDAOImp;
+
+import comp.cap.db.UserDAO;
+import comp.cap.db.UserDAODynamoDB;
 
 @RestController
 @RequestMapping(value="service/user")
 public class UserService {
 
 	private NoSQL data = NoSQL.getInstance();
-	private UserDAOImp userDAOImp = new UserDAOImp();
+	private UserDAO userDAO = new UserDAODynamoDB();
 	
 	//TODO: Deprecate?
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -32,7 +34,7 @@ public class UserService {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public void putUser(@Valid @RequestBody User user){
-		userDAOImp.addUser(user);
+		userDAO.addUser(user);
 		//data.putUser(user);
 	}
 	
