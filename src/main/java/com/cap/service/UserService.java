@@ -16,7 +16,7 @@ public class UserService {
 	private NoSQL data = NoSQL.getInstance();
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public User getUser(@PathVariable int id){
+	public User getUserById(@PathVariable int id){
 		return data.getUser(id);
 	}
 	
@@ -28,5 +28,10 @@ public class UserService {
 	@RequestMapping(method=RequestMethod.POST)
 	public void putUser(@RequestBody User user){
 		data.putUser(user);
+	}
+	
+	@RequestMapping(value="/{email}", method=RequestMethod.GET)
+	public User getUserByEmail(@PathVariable String email){
+		return data.getUser(email);
 	}
 }

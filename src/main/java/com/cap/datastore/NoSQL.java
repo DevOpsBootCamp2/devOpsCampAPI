@@ -28,6 +28,17 @@ public class NoSQL {
 		data.put(user.getId(), user);
 	}
 	
+	public User getUser(String email){
+		User user = null;
+		for(Map.Entry<Integer, User> es : data.entrySet()){
+			User tempUser=es.getValue();
+			if(tempUser.getEmail().equals(email)){
+				user = tempUser;
+			}
+		}
+		return user;
+	}
+	
 	public User[] getUsers(){
 		User[] users = new User[data.size()];
 		int index=0;
