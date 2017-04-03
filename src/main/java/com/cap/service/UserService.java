@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cap.datastore.NoSQL;
 import com.cap.domain.Login;
 import com.cap.domain.User;
 
@@ -22,13 +21,12 @@ import comp.cap.util.Encryption;
 @RequestMapping(value="service/user")
 public class UserService {
 
-	private NoSQL data = NoSQL.getInstance();
 	private UserDAO userDAO = new UserDAODynamoDB();
 	
 	//TODO: Deprecate?
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public User getUserById(@PathVariable int id){
-		return data.getUser(id);
+		return null;
 	}
 	
 	//TODO: Deprecate?
@@ -38,7 +36,6 @@ public class UserService {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	
 	public void putUser(@Valid @RequestBody User user){
 		userDAO.addUser(user);
 		//data.putUser(user);
