@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.InstanceProfileCredentialsProvider;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -34,7 +35,7 @@ public class UserDAODynamoDB implements UserDAO {
 	private final String password = "password";
 
 	public UserDAODynamoDB() {
-		dynamoDB = AmazonDynamoDBClientBuilder.standard().withRegion(region).withCredentials(credentials).build();
+		dynamoDB = AmazonDynamoDBClientBuilder.standard().withRegion(region).withCredentials(new InstanceProfileCredentialsProvider(false)).build();
 	}
 
 	@Override
