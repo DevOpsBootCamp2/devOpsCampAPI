@@ -40,16 +40,30 @@ public class UserDAOImp implements UserDAO {
 	}
 
 	@Override
-	public User getUser(String email) {
+	public User getUser(String email){
 		 HashMap<String, Condition> scanFilter = new HashMap<String, Condition>();
-         Condition condition = new Condition()
-             .withComparisonOperator(ComparisonOperator.GT.toString())
-             .withAttributeValueList(new AttributeValue(email));
+         Condition condition = new Condition().withComparisonOperator(ComparisonOperator.EQ)
+        		 							  .withAttributeValueList(new AttributeValue().withS(email));
          scanFilter.put("email", condition);
          ScanRequest scanRequest = new ScanRequest(tableName).withScanFilter(scanFilter);
          ScanResult scanResult = dynamoDB.scan(scanRequest);
-         System.out.println("user Result: " + scanResult);
-		return null;
+         if(scanResult.getCount()!=1){
+        	 try {
+				throw new Exception("user not found ");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+         }
+			
+         
+         Map<String, AttributeValue> userMap = scanResult.getItems().get(0);
+         scanResult.getItems().forEach(map -> System.out.println("user result :" + userMap));
+         userMap.forEach((k,v) -> System.out.println(k + ":" + v.getS()));
+         
+         return new User(userMap.get("FirstName").getS(),
+        		 		 userMap.get("LastName").getS(),
+        		 		 userMap.get("email").getS(),
+        		 		 userMap.get("password").getS());
 	}
 
 	@Override
