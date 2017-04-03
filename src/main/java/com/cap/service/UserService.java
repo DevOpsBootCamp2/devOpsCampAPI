@@ -31,7 +31,6 @@ public class UserService {
 		return null;
 	}
 	
-	//TODO: Deprecate?
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<User> getUsers(){
 		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "getUsers");
@@ -48,12 +47,8 @@ public class UserService {
 	public User login(@Valid @RequestBody Login login){
 		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "login");
 		User user = userDAO.getUser(login.getEmail());
-		if(user!=null){
-			if(Encryption.cryptWithMD5(login.getPassword()).equals(user.getPassword())){
-				return user;
-			} else {
-				return null;
-			}
+		if(user!=null && Encryption.cryptWithMD5(login.getPassword()).equals(user.getPassword())){
+			return user;
 		} else {
 			return null;
 		}
