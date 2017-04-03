@@ -31,18 +31,13 @@ public class DevOpsCampAPIApplication {
 		data.putUser(user0);
 		data.putUser(user1);
 		
-		
-		System.out.println();
 		User user = new User("biniam", "gebreyesus", "yolo", "biniam@biniam.com");
 		UserDAOImp userDAOImp = new UserDAOImp();
-		userDAOImp.getUser(user.getEmail());
-		userDAOImp.getUsers();
-		
-		userDAOImp.addUser(user);
-		
-		userDAOImp.getUser(user.getEmail());
-		userDAOImp.getUsers();
-		
+		try {
+			System.out.println(userDAOImp.getUser(user.getEmail()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		SpringApplication.run(DevOpsCampAPIApplication.class, args);
 	}
