@@ -1,6 +1,8 @@
 package com.cap.service;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
@@ -32,21 +34,28 @@ public class UserService {
 	//TODO: Deprecate?
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<User> getUsers(){
+		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "getUsers");
 		return userDAO.getUsers();
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public void putUser(@Valid @RequestBody User user){
+		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "putUser");
 		userDAO.addUser(user);
-		//data.putUser(user);
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public User login(@Valid @RequestBody Login login){
+		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "login");
 		User user = userDAO.getUser(login.getEmail());
-		if(Encryption.cryptWithMD5(login.getPassword()).equals(user.getPassword()))
+		if(user!=null){
+			if(Encryption.cryptWithMD5(login.getPassword()).equals(user.getPassword())){
 				return user;
-		
-		return null;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 }

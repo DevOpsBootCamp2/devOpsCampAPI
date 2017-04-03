@@ -5,8 +5,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import comp.cap.db.UserDAODynamoDB;
-
 public class Encryption {
 
 	private static MessageDigest md;
@@ -23,7 +21,7 @@ public class Encryption {
 			}
 			return sb.toString();
 		} catch (NoSuchAlgorithmException ex) {
-			Logger.getLogger(UserDAODynamoDB.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Encryption.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return null;
 	}
