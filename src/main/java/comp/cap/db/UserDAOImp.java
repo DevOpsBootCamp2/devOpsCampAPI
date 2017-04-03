@@ -1,8 +1,10 @@
 package comp.cap.db;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -15,6 +17,7 @@ import com.amazonaws.services.dynamodbv2.model.PutItemResult;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.cap.domain.User;
+
 import comp.cap.util.Encryption;
 
 public class UserDAOImp implements UserDAO {
@@ -33,10 +36,18 @@ public class UserDAOImp implements UserDAO {
 	
 	@Override
 	public List<User> getUsers() {
+		List<User> users = new ArrayList<User>();
+		
 		ScanRequest scanRequest = new ScanRequest(tableName);
         ScanResult scanResult = dynamoDB.scan(scanRequest);
-        System.out.println("users Result: " + scanResult);
-		return null;
+        for(Map<String, AttributeValue> userMap: scanResult.getItems()){
+        	users.add(new User(userMap.get("FirstName").getS(),
+   		 		 			   userMap.get("LastName").getS(),
+   		 		 			   userMap.get("email").getS(),
+   		 		 			   userMap.get("password").getS()));
+        }
+        System.out.println("users Result: " + users);
+		return users;
 	}
 
 	@Override
