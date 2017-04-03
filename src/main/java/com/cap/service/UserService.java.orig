@@ -14,9 +14,13 @@ import com.cap.datastore.NoSQL;
 import com.cap.domain.Login;
 import com.cap.domain.User;
 
+<<<<<<< HEAD
 import comp.cap.db.UserDAO;
 import comp.cap.db.UserDAODynamoDB;
+=======
+import comp.cap.db.UserDAOImp;
 import comp.cap.util.Encryption;
+>>>>>>> 2201ed1b6f95ed851cbd906f951a27b459bcdb1b
 
 @RestController
 @RequestMapping(value="service/user")
@@ -34,7 +38,7 @@ public class UserService {
 	//TODO: Deprecate?
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<User> getUsers(){
-		return userDAO.getUsers();
+		return userDAOImp.getUsers();
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -46,7 +50,7 @@ public class UserService {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public User login(@Valid @RequestBody Login login){
-		User user = userDAO.getUser(login.getEmail());
+		User user = userDAOImp.getUser(login.getEmail());
 		if(Encryption.cryptWithMD5(login.getPassword()).equals(user.getPassword()))
 				return user;
 		
