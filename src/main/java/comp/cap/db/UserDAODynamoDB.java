@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.InstanceProfileCredentialsProvider;
@@ -41,18 +43,16 @@ public class UserDAODynamoDB implements UserDAO {
 	@Override
 	public List<User> getUsers() {
 		List<User> users = new ArrayList<User>();
-		
 		ScanRequest scanRequest = new ScanRequest(tableName);
 		ScanResult scanResult = dynamoDB.scan(scanRequest);
-		System.out.println("users Result: " + scanResult);
-		for(Map<String, AttributeValue> userMap : scanResult.getItems()){
+		for (Map<String, AttributeValue> userMap : scanResult.getItems()) {
 			users.add(new User(userMap.get(this.firstName).getS(), userMap.get(this.lastName).getS(),
 					userMap.get(this.password).getS(), userMap.get(this.email).getS()));
 		}
-		
+		Logger.getLogger(UserDAODynamoDB.class.getName()).log(Level.INFO, "getUsers", users);
 		return users;
 	}
-	
+
 	@Override
 	public User getUser(String email) {
 		User user = null;
@@ -68,6 +68,7 @@ public class UserDAODynamoDB implements UserDAO {
 			user = new User(userMap.get(this.firstName).getS(), userMap.get(this.lastName).getS(),
 					userMap.get(this.password).getS(), userMap.get(this.email).getS());
 		}
+		Logger.getLogger(UserDAODynamoDB.class.getName()).log(Level.INFO, "getUser", user);
 		return user;
 	}
 
@@ -87,7 +88,7 @@ public class UserDAODynamoDB implements UserDAO {
 		Map<String, AttributeValue> item = createUserItem(user);
 		PutItemRequest putItemRequest = new PutItemRequest(tableName, item);
 		PutItemResult putItemResult = dynamoDB.putItem(putItemRequest);
-		System.out.println("putItemResult : " + putItemResult);
+		Logger.getLogger(UserDAODynamoDB.class.getName()).log(Level.INFO, "addUser", putItemResult);
 	}
 
 	private Map<String, AttributeValue> createUserItem(User user) {

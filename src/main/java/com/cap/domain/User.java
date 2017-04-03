@@ -6,8 +6,6 @@ import org.hibernate.validator.constraints.Email;
 
 public class User {
 
-	//TODO: Need id? @NotNull
-	private int id;
 	@NotNull
 	private String firstName;
 	@NotNull
@@ -30,10 +28,6 @@ public class User {
 		this.email = email;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
@@ -44,10 +38,6 @@ public class User {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public void setFirstName(String firstName) {
