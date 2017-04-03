@@ -28,11 +28,11 @@ public class NoSQL {
 		data.put(user.getId(), user);
 	}
 	
-	public User getUser(String email){
+	public User getUser(String email, String password){
 		User user = null;
 		for(Map.Entry<Integer, User> es : data.entrySet()){
 			User tempUser=es.getValue();
-			if(tempUser.getEmail().equals(email)){
+			if(tempUser.getEmail().equals(email) && tempUser.getPassword().equals(password)){
 				user = tempUser;
 			}
 		}

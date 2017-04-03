@@ -30,8 +30,10 @@ public class UserService {
 		data.putUser(user);
 	}
 	
-	@RequestMapping(value="/{email}", method=RequestMethod.GET)
-	public User getUserByEmail(@PathVariable String email){
-		return data.getUser(email);
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public User login(@RequestBody User user){
+		String email = user.getEmail();
+		String password = user.getPassword();
+		return data.getUser(email, password);
 	}
 }

@@ -17,12 +17,14 @@ public class DevOpsCampAPIApplication {
 		user0.setFirstName("harvey0");
 		user0.setLastName("Bal0");
 		user0.setPassword("password0");
+		user0.setEmail("harevy0@email.com");
 		
 		User user1 = new User();
 		user1.setId(1);
 		user1.setFirstName("harvey1");
 		user1.setLastName("Bal1");
 		user1.setPassword("password1");
+		user1.setEmail("harvey1@email.com");
 		
 		data.putUser(user0);
 		data.putUser(user1);
