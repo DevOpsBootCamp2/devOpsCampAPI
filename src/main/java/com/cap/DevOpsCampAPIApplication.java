@@ -7,7 +7,7 @@ import com.cap.datastore.NoSQL;
 import com.cap.domain.User;
 
 @SpringBootApplication
-public class SimpleWebServiceApplication {
+public class DevOpsCampAPIApplication {
 
 	public static void main(String[] args) {
 		
@@ -27,6 +27,6 @@ public class SimpleWebServiceApplication {
 		data.putUser(user0);
 		data.putUser(user1);
 		
-		SpringApplication.run(SimpleWebServiceApplication.class, args);
+		SpringApplication.run(DevOpsCampAPIApplication.class, args);
 	}
 }
