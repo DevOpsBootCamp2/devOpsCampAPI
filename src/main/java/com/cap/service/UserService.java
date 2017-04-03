@@ -32,8 +32,6 @@ public class UserService {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public User login(@RequestBody User user){
-		String email = user.getEmail();
-		String password = user.getPassword();
-		return data.getUser(email, password);
+		return data.getUser(user.getEmail(), user.getPassword());
 	}
 }
