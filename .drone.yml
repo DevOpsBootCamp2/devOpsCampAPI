@@ -32,11 +32,10 @@ pipeline:
     commands:
       - docker login -u mgopaul -p $PASS
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
-  deploy:
-    image: docker
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    commands:
-      - docker pull devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
-      - docker tag devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA devopsbootcamp2/devcamp:production
-      - docker stack deploy -c ./docker-compose.yml devcamp
+  notify:
+    image: debian
+    commands: 
+      - curl -X POST -H 'Content-type: application/json' 
+      --data '{"text":"The Boot Camp Application is now available.\n Any issues please contact the Boot Camp Team on 911."}'  https://hooks.slack.com/services/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
+    
+  
