@@ -1,4 +1,4 @@
-package comp.cap.db;
+package com.cap.db;
 
 import java.util.List;
 import com.cap.domain.User;
