@@ -37,9 +37,6 @@ pipeline:
     commands: 
       - chmod +x ./notifysuccessfailure.sh
       - ./notifysuccessfailure.sh
-    when:
-      success: true
-      failure: false
   finish:
     image: debian
     commands: 
