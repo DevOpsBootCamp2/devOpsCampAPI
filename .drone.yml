@@ -37,3 +37,4 @@ pipeline:
     commands: 
       - chmod +x ./notifysuccessfailure.sh
       - ./notifysuccessfailure.sh
+ 
