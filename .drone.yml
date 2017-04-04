@@ -18,8 +18,8 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker kill test
-      - docker rm test
+      - docker kill test || true
+      - docker rm test || true
       - docker create --name test mgopaul/devopscampapi-webserver:$DRONE_COMMIT_SHA
       - docker cp ./test.sh test:/test.sh
       - docker start test /test.sh
