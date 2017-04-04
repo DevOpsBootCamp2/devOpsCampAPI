@@ -6,13 +6,12 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cap.domain.Login;
+import com.cap.domain.Token;
 import com.cap.domain.User;
 
 import comp.cap.db.UserDAO;
@@ -24,12 +23,6 @@ import comp.cap.util.Encryption;
 public class UserService {
 
 	private UserDAO userDAO = new UserDAODynamoDB();
-	
-	//TODO: Deprecate?
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public User getUserById(@PathVariable int id){
-		return null;
-	}
 	
 	@RequestMapping(value="/all", method=RequestMethod.GET)
 	public List<User> getUsers(){
@@ -44,14 +37,16 @@ public class UserService {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public User login(@Valid @RequestBody Login login){
-		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "login");
-		User user = userDAO.getUser(login.getEmail());
-		if(user!=null && Encryption.cryptWithMD5(login.getPassword()).equals(user.getPassword())){
-			return user;
-		} else {
-			return null;
+	public User login(@Valid @RequestBody Token token){
+		User user = null;
+		if(token.isTokenValid()){
+			Logger.getLogger(UserService.class.getName()).log(Level.INFO, "Token Is Valid");
+			User internalUser = userDAO.getUser(token.getEmail());
+			if(internalUser!=null && Encryption.cryptWithMD5(token.getPassword()).equals(internalUser.getPassword())){
+				user = internalUser;
+			}
 		}
+		return user;
 	}
 	
 }
