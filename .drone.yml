@@ -8,7 +8,7 @@ pipeline:
          --label org.label-schema.vcs-ref=$DRONE_COMMIT_SHA
          --label build-number=$DRONE_BUILD_NUMBER
          --label build-date="$(date)"
-         -t mgopaul/devOpsCampApi-server:$DRONE_COMMIT_SHA .
+         -t mgopaul/devopscampapi-server:$DRONE_COMMIT_SHA .
   test:
     image: docker
     volumes:
@@ -16,6 +16,6 @@ pipeline:
     commands:
       - docker kill test
       - docker rm test
-      - docker create --name test mgopaul/devOpsCampApi-webserver:$DRONE_COMMIT_SHA
+      - docker create --name test mgopaul/devopscampapi-webserver:$DRONE_COMMIT_SHA
       - docker cp ./test.sh test:/test.sh
       - docker start test /test.sh
