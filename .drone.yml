@@ -35,4 +35,5 @@ pipeline:
   notify:
     image: debian
     commands: 
+      - chmod +x ./notifysuccessfailure.sh
       - ./notifysuccessfailure.sh
