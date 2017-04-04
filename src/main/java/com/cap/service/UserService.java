@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cap.db.UserDAO;
+import com.cap.db.UserDAODynamoDB;
 import com.cap.domain.Token;
 import com.cap.domain.User;
-
-import comp.cap.db.UserDAO;
-import comp.cap.db.UserDAODynamoDB;
-import comp.cap.util.Encryption;
+import com.cap.util.Encryption;
 
 @RestController
 @RequestMapping(value="service/user")

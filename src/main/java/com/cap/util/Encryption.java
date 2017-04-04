@@ -1,4 +1,4 @@
-package comp.cap.util;
+package com.cap.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
