@@ -1,12 +1,12 @@
 #!/bin/bash
 set -eu
 
-/server &
+/usr/bin/java -jar /DevOpsCampAPI-0.0.1-SNAPSHOT.jar &
 ID=$! # ID of webserver process, so we can kill it
 
 tests_passed=true
-expected="DevOpsCampApi Running"
-output=output=$(curl -s localhost:8080/service/user/health)
+expected="{\"status\":\"UP\"}"
+output=$(curl -s localhost:8080/health)
 if [[ "$expected" != "$output" ]]; then
   echo "Test Failure"
   echo "$expected != $output"
