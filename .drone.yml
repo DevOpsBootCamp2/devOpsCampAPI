@@ -1,5 +1,9 @@
 pipeline:
-  build:
+  buildjar:
+    image: maven:3.2-jdk-8
+    commands:
+      - mvn -q -DskipTests package
+  buildimage:
     image: docker
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
