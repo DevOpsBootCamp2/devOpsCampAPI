@@ -37,9 +37,8 @@ pipeline:
     commands: 
       - chmod +x ./notifysuccessfailure.sh
       - ./notifysuccessfailure.sh
-     when:
-       status: [ failure ]
-       event: [ push, pull_request ]
+    when:
+        status: [failure]
   finish:
     image: debian
     commands: 
