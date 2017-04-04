@@ -1,0 +1,21 @@
+pipeline:
+  build:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker build
+         --label org.label-schema.vcs-ref=$DRONE_COMMIT_SHA
+         --label build-number=$DRONE_BUILD_NUMBER
+         --label build-date="$(date)"
+         -t mgopaul/devOpsCampApi-server:$DRONE_COMMIT_SHA .
+  test:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker kill test
+      - docker rm test
+      - docker create --name test mgopaul/devOpsCampApi-webserver:$DRONE_COMMIT_SHA
+      - docker cp ./test.sh test:/test.sh
+      - docker start test /test.sh

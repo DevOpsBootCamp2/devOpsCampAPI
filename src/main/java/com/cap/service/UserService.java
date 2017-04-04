@@ -53,4 +53,10 @@ public class UserService {
 			return null;
 		}
 	}
+	
+	@RequestMapping(value="/health", method=RequestMethod.GET)
+	public String getHealth(){
+		Logger.getLogger(UserService.class.getName()).log(Level.INFO, "getHealth");
+		return "DevOpsCampApi Running";
+	}
 }
