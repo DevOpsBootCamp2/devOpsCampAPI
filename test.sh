@@ -5,7 +5,7 @@ set -eu
 ID=$! # ID of webserver process, so we can kill it
 
 tests_passed=true
-expected="{\"status\":\"P\"}"
+expected="{\"status\":\"AP\"}"
 output=$(curl -s localhost:8080/health)
 if [[ "$expected" != "$output" ]]; then
   echo "Test Failure"
