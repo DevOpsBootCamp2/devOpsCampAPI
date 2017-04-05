@@ -34,7 +34,7 @@ pipeline:
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
   notify:
     when:
-       status: [failure]
+       status: [failure,success]
     image: amouat/network-utils
     commands: 
       - chmod +x ./notifyfailure.sh
