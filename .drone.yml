@@ -32,7 +32,6 @@ pipeline:
     commands:
       - docker login -u mgopaul -p $PASS
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
-  
   notify:
     when:
        status: [failure]
