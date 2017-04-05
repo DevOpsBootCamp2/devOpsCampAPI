@@ -32,7 +32,17 @@ pipeline:
     commands:
       - docker login -u mgopaul -p $PASS
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
+  deploy:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker pull devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
+      - docker tag devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA devopsbootcamp2/devcamp:production
+      - docker stack deploy -c ./docker-compose.yml devcamp
   notify:
+    when:
+       status: [failure]
     image: amouat/network-utils
     commands: 
       - chmod +x ./notifysuccessfailure.sh
