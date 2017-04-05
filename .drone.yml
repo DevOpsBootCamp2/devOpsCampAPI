@@ -34,13 +34,6 @@ pipeline:
       - docker tag devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA devopsbootcamp2/devcamp:production
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
       - docker push devopsbootcamp2/devcamp:production
-  deploy:
-    ssh:
-      host: $SSH_MANAGER
-      user: $SSH_USER
-      port: 22
-      commands:
-        - /deploy_api.sh
   notify:
     when:
         status: [failure]
