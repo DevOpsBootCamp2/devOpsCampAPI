@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
 /usr/bin/java -jar /DevOpsCampAPI-0.0.1-SNAPSHOT.jar &
