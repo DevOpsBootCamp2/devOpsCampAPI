@@ -34,9 +34,7 @@ pipeline:
       - docker tag devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA devopsbootcamp2/devcamp:production
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
   deploy:
-    image: docker
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    image: amouat/network-utils
     commands:
       - ssh $SSH_USER@$SSH_MANAGER /deploy_api.sh
   notify:
