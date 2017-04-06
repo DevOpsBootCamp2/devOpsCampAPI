@@ -34,6 +34,16 @@ pipeline:
       - docker tag devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA devopsbootcamp2/devcamp:production
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
       - docker push devopsbootcamp2/devcamp:production
+  deploy:
+    image: devopsbootcamp2/ssh-drone-plugin
+    environment:
+      - SSH_USER=${SSH_USER}
+      - SSH_KEY=/data/keys/swarm_master_ssh_key
+      - SSH_COMMAND=~/deploy_api.sh
+      - SSH_HOST=${SSH_IP}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/ubuntu/keys:/data/keys
   notify:
     when:
         status: [failure]
