@@ -18,6 +18,8 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
+      - docker kill test || true
+      - docker rm test || true
       - docker create --name test devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
       - docker cp ./test.sh test:/test.sh
       - docker commit test devopsbootcamp2/devcamp2
