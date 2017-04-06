@@ -18,7 +18,7 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-     - docker run devopsbootcamp2/devcamp /test.sh
+      - docker run devopsbootcamp2/devcamp /test.sh
   push:
     image: docker
     environment:
