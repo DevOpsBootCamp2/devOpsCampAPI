@@ -1,5 +1,5 @@
 #!/bin/sh
-#running java
+
 /usr/bin/java -jar /DevOpsCampAPI-0.0.1-SNAPSHOT.jar &
 ID=$! # ID of webserver process, so we can kill it
 
