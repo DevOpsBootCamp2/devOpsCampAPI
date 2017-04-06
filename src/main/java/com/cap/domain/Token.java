@@ -13,8 +13,6 @@ public class Token {
 	private String password;
 	@NotNull
 	private String token;
-	//TODO: DO NOT HARDCODE VALUE!!!!!!!!!!!! GET FROM APPLICATION.PROPERTIES INSTEAD
-	private final String internalToken="abc123";
 	
 	public String getEmail() {
 		return email;
@@ -33,14 +31,5 @@ public class Token {
 	}
 	public void setToken(String token) {
 		this.token = token;
-	}
-	
-	public boolean isTokenValid(){
-		boolean result=false;
-		System.out.println("Token: "+token+" | Internal Token: "+internalToken);
-		if(this.token.equals(internalToken)){
-			result=true;
-		}
-		return result;
 	}
 }
