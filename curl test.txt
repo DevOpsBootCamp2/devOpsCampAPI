@@ -1,3 +1,0 @@
-$ curl -v -H "Content-Type: application/json" -X POST -d '{"firstName":"harvey2","lastName":"bal2","password":"password2","email":"harevy2@email.com"}' http://localhost:8080/service/user
-
-$ curl -v -H "Content-Type: application/json" -X POST -d '{"password":"l33t","email":"harvey@email.com"}' http://localhost:8080/service/user/login
