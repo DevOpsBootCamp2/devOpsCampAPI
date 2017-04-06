@@ -18,7 +18,10 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker run devopsbootcamp2/devcamp /test.sh
+      - docker create --name test devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
+      - docker cp ./test.sh test:/test.sh
+      - docker commit test devopsbootcamp2/devcamp2
+      - docker run devopsbootcamp2/devcamp2 sh /test.sh
   push:
     image: docker
     environment:
