@@ -18,11 +18,7 @@ pipeline:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
-      - docker kill test || true
-      - docker rm test || true
-      - docker create --name test devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
-      - docker cp ./test.sh test:/test.sh
-      - docker start test /test.sh
+      - docker run devopsbootcamp2/devcamp /test.sh
   push:
     image: docker
     environment:
@@ -34,6 +30,14 @@ pipeline:
       - docker tag devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA devopsbootcamp2/devcamp:production
       - docker push devopsbootcamp2/devcamp:$DRONE_COMMIT_SHA
       - docker push devopsbootcamp2/devcamp:production
+  deploy:
+    image: appleboy/drone-ssh
+    host: ${SSH_MANAGER}
+    username: ${SSH_USER}
+    key: ${DEPLOY_KEY}
+    port: 22
+    script:
+      - /deploy_api.sh
   notify:
     when:
         status: [failure]
